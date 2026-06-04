@@ -33,11 +33,11 @@
 
 ### Задачи
 
-- [ ] Создать `pyproject.toml`.
-- [ ] Добавить зависимости: `streamlit`, `scikit-learn`, `pytest`.
-- [ ] Создать `.gitignore`.
-- [ ] Добавить в `.gitignore`: `.venv/`, `__pycache__/`, `.pytest_cache/`, `.DS_Store`, `data/index/`.
-- [ ] Создать папки проекта:
+- [x] Создать `pyproject.toml`.
+- [x] Добавить зависимости: `streamlit`, `scikit-learn`, `pytest`.
+- [x] Создать `.gitignore`.
+- [x] Добавить в `.gitignore`: `.venv/`, `__pycache__/`, `.pytest_cache/`, `.DS_Store`, `data/index/`.
+- [x] Создать папки проекта:
 
 ```text
 app/
@@ -48,8 +48,8 @@ data/index/
 tests/
 ```
 
-- [ ] Создать `app/config.py`.
-- [ ] В `app/config.py` вынести пути, `top_k`, размер чанка и имена файлов индекса.
+- [x] Создать `app/config.py`.
+- [x] В `app/config.py` вынести пути, `top_k`, размер чанка и имена файлов индекса.
 
 ### Проверка
 
@@ -68,9 +68,9 @@ uv run python -c "import app.config; print('OK')"
 
 ### Задачи
 
-- [ ] Подготовить `data/raw/datasets.json`.
-- [ ] Загрузить или сформировать выборку из SQuAD 2.0.
-- [ ] Привести записи к единому формату:
+- [x] Подготовить `data/raw/datasets.json`.
+- [x] Загрузить или сформировать выборку из SQuAD 2.0.
+- [x] Привести записи к единому формату:
 
 ```json
 {
@@ -87,8 +87,8 @@ uv run python -c "import app.config; print('OK')"
 }
 ```
 
-- [ ] Обеспечить масштаб: 1000+ текстовых записей в `datasets.json` или 1000+ чанков после нарезки.
-- [ ] Проверить, что у каждой записи есть `id`, `title`, `text`, `source`.
+- [x] Обеспечить масштаб: 1000+ текстовых записей в `datasets.json` или 1000+ чанков после нарезки.
+- [x] Проверить, что у каждой записи есть `id`, `title`, `text`, `source`.
 
 ### Проверка
 
@@ -119,11 +119,11 @@ print('OK:', len(items), 'records')
 
 ### Задачи
 
-- [ ] Создать `scripts/ingest.py`.
-- [ ] Реализовать чтение `data/raw/datasets.json`.
-- [ ] Очистить текстовые поля от лишних пробелов и пустых строк.
-- [ ] Преобразовать записи в `data/processed/documents.jsonl`.
-- [ ] Сохранить metadata: `doc_id`, `title`, `source`, `questions`.
+- [x] Создать `scripts/ingest.py`.
+- [x] Реализовать чтение `data/raw/datasets.json`.
+- [x] Очистить текстовые поля от лишних пробелов и пустых строк.
+- [x] Преобразовать записи в `data/processed/documents.jsonl`.
+- [x] Сохранить metadata: `doc_id`, `title`, `source`, `questions`.
 
 ### Проверка
 
@@ -149,12 +149,12 @@ print('OK:', len(lines), 'documents')
 
 ### Задачи
 
-- [ ] Создать `app/chunker.py`.
-- [ ] Реализовать нарезку документов на чанки.
-- [ ] Настроить максимальный размер чанка и overlap через `app/config.py`.
-- [ ] Сохранять для каждого чанка: `chunk_id`, `doc_id`, `title`, `source`, `text`.
-- [ ] Создать или обновить логику сохранения `data/processed/chunks.jsonl`.
-- [ ] Добавить тесты chunking.
+- [x] Создать `app/chunker.py`.
+- [x] Реализовать нарезку документов на чанки.
+- [x] Настроить максимальный размер чанка и overlap через `app/config.py`.
+- [x] Сохранять для каждого чанка: `chunk_id`, `doc_id`, `title`, `source`, `text`.
+- [x] Создать или обновить логику сохранения `data/processed/chunks.jsonl`.
+- [x] Добавить тесты chunking.
 
 ### Проверка
 
@@ -186,12 +186,12 @@ print('OK:', len(lines), 'chunks')
 
 ### Задачи
 
-- [ ] Создать `scripts/build_index.py`.
-- [ ] Собрать pipeline: ingestion → chunking → TF-IDF index.
-- [ ] Обучить `TfidfVectorizer` на текстах чанков.
-- [ ] Сохранить vectorizer в `data/index/vectorizer.pkl`.
-- [ ] Сохранить матрицу в `data/index/matrix.npz`.
-- [ ] Сохранить копию чанков в `data/index/chunks.jsonl`.
+- [x] Создать `scripts/build_index.py`.
+- [x] Собрать pipeline: ingestion → chunking → TF-IDF index.
+- [x] Обучить `TfidfVectorizer` на текстах чанков.
+- [x] Сохранить vectorizer в `data/index/vectorizer.pkl`.
+- [x] Сохранить матрицу в `data/index/matrix.npz`.
+- [x] Сохранить копию чанков в `data/index/chunks.jsonl`.
 
 ### Проверка
 
@@ -220,12 +220,12 @@ print('OK:', len(required), 'index files')
 
 ### Задачи
 
-- [ ] Создать `app/retriever.py`.
-- [ ] Реализовать загрузку `vectorizer.pkl`, `matrix.npz`, `chunks.jsonl`.
-- [ ] Реализовать метод поиска по вопросу пользователя.
-- [ ] Использовать cosine similarity.
-- [ ] Возвращать top-k результатов.
-- [ ] Для каждого результата возвращать `text`, `doc_id`, `title`, `source`, `score`.
+- [x] Создать `app/retriever.py`.
+- [x] Реализовать загрузку `vectorizer.pkl`, `matrix.npz`, `chunks.jsonl`.
+- [x] Реализовать метод поиска по вопросу пользователя.
+- [x] Использовать cosine similarity.
+- [x] Возвращать top-k результатов.
+- [x] Для каждого результата возвращать `text`, `doc_id`, `title`, `source`, `score`.
 
 ### Проверка
 
@@ -257,12 +257,12 @@ Retrieval работает из консоли и возвращает реле�
 
 ### Задачи
 
-- [ ] Создать `app/prompts.py`.
-- [ ] Описать правила demo-answer: отвечать только по найденному контексту.
-- [ ] Создать `app/generator.py`.
-- [ ] Реализовать функцию `ask()` или аналогичную функцию для получения ответа.
-- [ ] Добавить отказ, если контекста нет или score слишком низкий.
-- [ ] Возвращать ответ и список источников.
+- [x] Создать `app/prompts.py`.
+- [x] Описать правила demo-answer: отвечать только по найденному контексту.
+- [x] Создать `app/generator.py`.
+- [x] Реализовать функцию `ask()` или аналогичную функцию для получения ответа.
+- [x] Добавить отказ, если контекста нет или score слишком низкий.
+- [x] Возвращать ответ и список источников.
 
 ### Проверка
 
@@ -299,13 +299,13 @@ print(result['answer'])
 
 ### Задачи
 
-- [ ] Создать `app/main.py`.
-- [ ] Добавить поле ввода вопроса.
-- [ ] Добавить настройку `top_k`.
-- [ ] Показывать найденные фрагменты, score и источники.
-- [ ] Показывать итоговый demo-ответ.
-- [ ] Добавить сообщение, если индекс не собран.
-- [ ] Проверить 3 demo-вопроса и 1 negative-вопрос.
+- [x] Создать `app/main.py`.
+- [x] Добавить поле ввода вопроса.
+- [x] Добавить настройку `top_k`.
+- [x] Показывать найденные фрагменты, score и источники.
+- [x] Показывать итоговый demo-ответ.
+- [x] Добавить сообщение, если индекс не собран.
+- [x] Проверить 3 demo-вопроса и 1 negative-вопрос.
 
 ### Проверка
 
@@ -330,12 +330,12 @@ Demo-вопросы:
 
 ### Задачи
 
-- [ ] Добавить `tests/test_chunking.py`.
-- [ ] Добавить `tests/test_retrieval.py`.
-- [ ] Добавить при необходимости `tests/test_generator.py`.
-- [ ] Обеспечить минимум 5 тестов.
-- [ ] Обновить корневой `README.md`.
-- [ ] В README указать команды запуска:
+- [x] Добавить `tests/test_chunking.py`.
+- [x] Добавить `tests/test_retrieval.py`.
+- [x] Добавить при необходимости `tests/test_generator.py`.
+- [x] Обеспечить минимум 5 тестов.
+- [x] Обновить корневой `README.md`.
+- [x] В README указать команды запуска:
 
 ```bash
 uv sync
@@ -343,7 +343,7 @@ uv run python scripts/build_index.py
 uv run streamlit run app/main.py
 ```
 
-- [ ] Добавить в README описание проекта, данных, pipeline, demo-вопросы и negative-вопрос.
+- [x] Добавить в README описание проекта, данных, pipeline, demo-вопросы и negative-вопрос.
 
 ### Проверка
 
