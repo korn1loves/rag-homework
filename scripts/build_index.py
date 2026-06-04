@@ -23,9 +23,31 @@ from app.config import (
 from ingest import run as ingest_run
 
 
+def make_index_text(chunk: dict) -> str:
+    """Build searchable text from chunk text and metadata."""
+    questions = " ".join(
+        qa.get("question", "")
+        for qa in chunk.get("questions", [])
+        if isinstance(qa, dict)
+    )
+
+    return " ".join(
+        [
+            chunk.get("title", ""),
+            questions,
+            chunk.get("text", ""),
+        ]
+    ).strip()
+
+
 def build_tfidf(texts: list[str]) -> tuple[TfidfVectorizer, scipy.sparse.csr_matrix]:
     """Fit TF-IDF vectorizer on chunk texts."""
-    vectorizer = TfidfVectorizer(stop_words="english")
+    vectorizer = TfidfVectorizer(
+        strip_accents="unicode",
+        lowercase=True,
+        stop_words="english",
+        ngram_range=(1, 2),
+    )
     matrix = vectorizer.fit_transform(texts)
     return vectorizer, matrix
 
@@ -53,7 +75,7 @@ def run() -> int:
     chunk_count = chunk_run()
 
     chunks = load_documents(CHUNKS_JSONL)
-    texts = [chunk["text"] for chunk in chunks]
+    texts = [make_index_text(chunk) for chunk in chunks]
 
     if not texts:
         raise ValueError("No chunks found for indexing")
